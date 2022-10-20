@@ -1,125 +1,120 @@
-// #include <bits/stdc++.h>
 # include <iostream>
+# include <vector>
 
 using namespace std;
 
-# define MAX_TERM 100
+vector<int> tower1, tower2, tower3;
 
-typedef struct
-{
-    int rows;
-    int cols;
-    int value;
-} Matrix;
+// void push(vector<int> v, int val) {
+//     v.push_back(val);
+//     // return v;
+// }
 
-void printMatrix(Matrix M[])
-{
-    cout << endl;
-    for (int i = 0; i <= M[0].value; i++)
-    {
-        cout << i << " ";
-        if (M[i].value != 0) {
-            cout << M[i].rows << " " << M[i].cols << " " << M[i].value;
+// void pop(vector<int> v) {
+//     v.pop_back();
+//     // return v;
+// }
+
+void printStack() {
+    cout << "Tower1:";
+    if (tower1.empty()) {
+        cout << endl;
+    }else {
+        for (auto &i : tower1) {
+            cout << i << " ";
         }
         cout << endl;
     }
-    cout << endl;
-}
-
-void fastTranspose(Matrix M[], Matrix T[])
-{
-    int nonZeroRow[M[0].cols] = {0}, startPos[M[0].cols] = {0};
-    T[0].rows = M[0].rows;
-    T[0].cols = M[0].cols;
-    T[0].value = M[0].value;
-    // cout << endl;
-    for (int i = 1; i <= M[0].value; i++)
-    {
-        // cout << M[i].cols << " " << nonZeroRow[M[i].cols] << endl;
-        nonZeroRow[M[i].cols]++;
-        // cout << M[i].cols << " " << nonZeroRow[M[i].cols] << endl;
-    }
-    // cout << endl;
-
-    startPos[0] = 1;
-
-    for (int i = 1; i < M[0].value; i++)
-    {
-        // cout << startPos[i - 1] <<" " << nonZeroRow[i - 1] << endl;
-        startPos[i] = startPos[i - 1] + nonZeroRow[i - 1];
-    }
-    // for (int i = 1; i <= M[0].value; i++)
-    // {
-    //     cout << M[i].cols << " "<< startPos[M[i].cols] << endl;
-    // }
-
-    for (int i = 1; i <= M[0].value; i++)
-    {
-        int j = startPos[M[i].cols]++;
-        // cout << j << " " << M[i].cols << endl;
-        T[j].rows = M[i].cols;
-        T[j].cols = M[i].rows;
-        T[j].value = M[i].value;
-    }
-    // printMatrix(T);
-}
-
-void multiply(Matrix A[], Matrix BT[]) {
-    cout << endl;
-    // int count = 1;
-    Matrix X[MAX_TERM] = {0};
-    X[0].rows = A[0].rows;
-    X[0].cols = BT[0].cols;
-    for (int i = 1; i <= A[0].value; i++) {
-        for (int j = 1; j <= BT[0].value; j++) {
-            if (A[i].cols == BT[j].cols) {
-                int multi = A[i].value * BT[j].value;
-                // cout << i << " " << j << " " << A[i].cols << " " << BT[j].cols << " " << multi << endl;
-                X[j].rows = A[i].rows;
-                X[j].cols = BT[j].rows;
-                X[j].value += multi;
-                // cout\<< j << " " << X[count].rows << " " << X[count].cols << " " << multi << endl;
-                count++;
-            }
+    cout << "Tower2:";
+    if (tower2.empty()) {
+        cout << endl;
+    }else {
+        for (auto &i : tower2) {
+            cout << i << " ";
         }
+        cout << endl;
     }
-    // X[0].value = count - 1;
-    printMatrix(X);
+    cout << "Tower3:";
+    if (tower3.empty()) {
+        cout << endl;
+    }else {
+        for (auto &i : tower3) {
+            cout << i << " ";
+        }
+        cout << endl;
+    }
 }
 
-void inputMatrix(Matrix M[]) {
-    for (int i = 1; i <= M[0].value; i++) {
-        cin >> M[i].rows >> M[i].cols >> M[i].value;
-    }
-}
-
-int main(int argc, char **argv)
-{
-    int aRows, aCols, aValue, bRows, bCols, bValue;
-
-    cin >> aRows >> aCols >> aValue;
-    Matrix matrixA[aValue + 1];
-    matrixA[0].rows = aRows;
-    matrixA[0].cols = aCols;
-    matrixA[0].value = aValue;
-
-    inputMatrix(matrixA);
-
-    // printMatrix(matrixA);
+void slove(int len, vector<int> v1, vector<int> v2) {
     
-    cin >> bRows >> bCols >> bValue;
-    Matrix matrixB[bValue + 1];
-    matrixB[0].rows = bRows;
-    matrixB[0].cols = bCols;
-    matrixB[0].value = bValue;
-    inputMatrix(matrixB);
-    // printMatrix(matrixB);
+}
 
-    Matrix matrixBT[bValue + 1];
-    fastTranspose(matrixB, matrixBT);
-    // printMatrix(matrixT, aValue + 1);
-    multiply(matrixA, matrixBT);
+int main() {
+    int n = 0;
+    cin >> n;
+
+    for (int i = n; i > 0; i--) {
+        tower1 = push(tower1, i);
+    }
+    if (tower1.size() == 1) {
+        tower3 = push(tower3, 1);
+        tower1 = pop(tower1);
+    }else {
+        slove();
+    }
 
     return 0;
 }
 
+// typedef struct node {
+//     int value;
+//     node *next;
+// }Node;
+
+// typedef node *NodePtr;
+
+// void push(NodePtr *head, int i);
+// void printStack(NodePtr head);
+
+// int main() {
+//     int n = 0;
+//     cin >> n;
+//     NodePtr head = NULL;
+//     for (int i = 3; i > 0; i--) {
+//         push(&head, i);
+//         printStack(&head);
+//     }
+
+//     return 0;
+// }
+
+// void push(NodePtr *head, int i) {
+//     NodePtr newNode = new NodePtr();
+
+//     if (newNode != NULL) {
+//         newNode->value = i;
+//         newNode->next = head;
+//         *head = newNode;
+//     }else {
+//         printf("No memery available\n");
+//     }
+// }
+
+// void printStack(NodePtr *currentPtr) {
+//     if (currentPtr == NULL)
+//     {
+//         puts("The stack is empty.\n");
+//     }
+//     else
+//     {
+//         puts("The stack is: ");
+
+//         while (currentPtr != NULL)
+//         {
+//             printf("%d --> ", currentPtr->value);
+//             currentPtr = currentPtr->next;
+//         }
+
+//         puts("NULL\n");
+//     }
+// }
