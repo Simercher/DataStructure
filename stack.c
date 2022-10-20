@@ -1,9 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-void push(StackNodePtr *topPtr, int info);
-void printlist(StackNodePtr currentPtr);
-
 struct stackNode
 {
     int data;
@@ -13,6 +10,9 @@ struct stackNode
 typedef struct stackNode StackNode;
 typedef StackNode *StackNodePtr;
 
+void push(StackNodePtr *topPtr, int info);
+void printlist(StackNodePtr currentPtr);
+
 int main()
 {
     StackNodePtr stackPtr = NULL; //指標位址指向NULL
@@ -21,7 +21,7 @@ int main()
     while (scanf("%d", &value))
     {
         push(&stackPtr, value);
-        printlist(stackPtr);
+        printlist(&stackPtr);
     }
 
     return 0;
@@ -30,7 +30,7 @@ void push(StackNodePtr *topPtr, int info)
 {
     StackNodePtr newPtr = malloc(sizeof(StackNode));
 
-    if (newPtr == NULL)
+    if (newPtr != NULL)
     {
         newPtr->data = info;
         newPtr->nextptr = *topPtr;
@@ -54,7 +54,7 @@ void printlist(StackNodePtr currentPtr)
 
         while (currentPtr != NULL)
         {
-            printf("%s", currentPtr->data);
+            printf("%d --> ", currentPtr->data);
             currentPtr = currentPtr->nextptr;
         }
 
